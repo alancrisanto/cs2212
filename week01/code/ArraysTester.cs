@@ -39,7 +39,15 @@ public static class ArraysTester {
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
-        return new double[0]; // replace this return statement with your own
+        //Create an empty fix array
+        var result = new double[length];
+        // create a for loop from 1 to length
+        for (var i = 0; i < length; i++){
+            // add the product into the result array
+            result[i] = (i+ 1) * number;
+        }
+        // return the fix array
+        return result;
     }
     
     /// <summary>
@@ -57,5 +65,13 @@ public static class ArraysTester {
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
+        // Assuming data is a List<int>
+        // Create a list to store the new list obtained by GetRange function
+        // GetRange(data.Count - amount, amount ) => data.Count - amount gives the start point and Amount the number of slices
+        // GetRange(0, data.Count - amount ) => Slice from the first element to last element added 
+        var newList = new List<int>(data.GetRange(data.Count - amount, amount ))
+                        .Concat(data.GetRange(0, data.Count - amount )).ToList();
+        // Print the new List
+        Console.WriteLine("Rotated list: " + string.Join(", ", newList));
     }
 }
