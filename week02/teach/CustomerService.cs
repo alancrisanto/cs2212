@@ -5,8 +5,8 @@
 public class CustomerService {
     public static void Run() {
         // Example code to see what's in the customer service queue:
-        // var cs = new CustomerService(10);
-        // Console.WriteLine(cs);
+        var cs = new CustomerService(10);
+        Console.WriteLine(cs);
 
         // Test Cases
 
@@ -15,7 +15,11 @@ public class CustomerService {
         // Expected Result: 
         Console.WriteLine("Test 1");
 
-        // Defect(s) Found: 
+        // Defect(s) Found:
+        var cs1 = new CustomerService(5);
+        cs1.AddNewCustomer();
+        cs1.ServeCustomer();
+
 
         Console.WriteLine("=================");
 
@@ -25,10 +29,30 @@ public class CustomerService {
         Console.WriteLine("Test 2");
 
         // Defect(s) Found: 
+        var cs2 = new CustomerService(0);
+        cs2.ServeCustomer();
 
         Console.WriteLine("=================");
 
         // Add more Test Cases As Needed Below
+        // var cs3 = new CustomerService(8);
+
+        // cs3.AddNewCustomer();
+        // cs3.AddNewCustomer();
+        // cs3.AddNewCustomer();
+        // cs3.ServeCustomer();
+        // cs3.ServeCustomer();
+        // cs3.ServeCustomer();
+        // cs3.ServeCustomer();
+
+        var cs4 = new CustomerService(4);
+
+        cs4.AddNewCustomer();
+        cs4.AddNewCustomer();
+        cs4.AddNewCustomer();
+        cs4.AddNewCustomer();
+        cs4.AddNewCustomer();
+
     }
 
     private readonly List<Customer> _queue = new();
@@ -67,7 +91,7 @@ public class CustomerService {
     /// </summary>
     private void AddNewCustomer() {
         // Verify there is room in the service queue
-        if (_queue.Count > _maxSize) {
+        if (_queue.Count >= _maxSize) {
             Console.WriteLine("Maximum Number of Customers in Queue.");
             return;
         }
@@ -88,9 +112,13 @@ public class CustomerService {
     /// Dequeue the next customer and display the information.
     /// </summary>
     private void ServeCustomer() {
-        _queue.RemoveAt(0);
+        if (_queue.Count <= 0){
+            Console.WriteLine("Empty Queue");
+        } else{
         var customer = _queue[0];
+        _queue.RemoveAt(0);
         Console.WriteLine(customer);
+        }
     }
 
     /// <summary>

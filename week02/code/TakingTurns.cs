@@ -16,7 +16,11 @@
         while (players.Length > 0)
             players.GetNextPerson();
         // Defect(s) Found: 
-
+        /* ----------------------------------------------------
+        The GetNextPerson() is not being applying correctly to each person
+        the expected result should be  Bob, Tim, Sue, Bob, Tim, Sue, Tim, Sue, Tim, Tim
+        But is getting this result: Sue, Sue, Sue, Tim, Tim, Tim, Tim, Tim, Bob, Bob
+         */
         Console.WriteLine("---------");
 
         // Test 2
@@ -39,6 +43,12 @@
             players.GetNextPerson();
 
         // Defect(s) Found: 
+        /*
+        ----------------------------------------------------
+        The result obtained is: Sue, Sue, Sue, Tim, Tim, George, George, George, Tim, Tim, Tim, Bob, Bob
+        After adding George the turns are incorrect
+
+        */
 
         Console.WriteLine("---------");
 
@@ -57,6 +67,12 @@
             // Console.WriteLine(players);
         }
         // Defect(s) Found: 
+        /*
+        ----------------------------------------------------
+        Result obtained: Sue, Sue, Sue, Tim, Bob, Bob, No one in the queue., No one in the queue, No one in the queue, No one in the queue
+        Tim's turns is not handle correctly, it should be infinite
+
+        */
 
         Console.WriteLine("---------");
 
@@ -74,6 +90,11 @@
             // Console.WriteLine(players);
         }
         // Defect(s) Found: 
+        /*
+        ----------------------------------------------------
+        Result obtained: Sue, Sue, Sue, Tim, No one in the queue, No one in the queue, No one in the queue, No one in the queue, No one in the queue, No one in the queue
+        Again Tim's turn is not handle correctly, it should be infinite
+        */
 
         Console.WriteLine("---------");
 
@@ -84,5 +105,10 @@
         players = new TakingTurnsQueue();
         players.GetNextPerson();
         // Defect(s) Found:
+        /*
+        ----------------------------------------------------
+        Result Obtained: No one in the queue.
+        Test are correct
+        */
     }
 }
