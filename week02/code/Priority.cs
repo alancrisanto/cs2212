@@ -7,26 +7,37 @@
         // Test Cases
         // Test 1
         // Scenario: Create a queue with the following priority:
-        // ("A", 5), ("B", 2), ("C", 1)
-        priorityQueue.Enqueue("A", 5);
+        // ("A", 3), ("B", 2), ("C", 1)
+        // Expected result: A, B, C
+        priorityQueue.Enqueue("A", 3);
         priorityQueue.Enqueue("B", 2);
         priorityQueue.Enqueue("C", 1);
 
-        Console.WriteLine(priorityQueue);
         // Expected Result: 
         Console.WriteLine("Test 1");
+        Console.WriteLine(priorityQueue.Dequeue());
+        Console.WriteLine(priorityQueue.Dequeue());
+        Console.WriteLine(priorityQueue.Dequeue());
 
         // Defect(s) Found: 
+        // Result obtained: A, A, A, A, A, A
 
         Console.WriteLine("---------");
 
         // Test 2
-        // Scenario: 
-        // Expected Result: 
+        // Scenario: Create a queue with more than one item with th highest priority
+        // Expected Result: A,A, B, B, C, C
         Console.WriteLine("Test 2");
+        priorityQueue = new PriorityQueue();
+        priorityQueue.Enqueue("A", 2);
+        priorityQueue.Enqueue("B", 2);
+        priorityQueue.Enqueue("C", 2);
 
+        Console.WriteLine(priorityQueue.Dequeue());
+        Console.WriteLine(priorityQueue.Dequeue());
+        Console.WriteLine(priorityQueue.Dequeue());
         // Defect(s) Found: 
-
+        // Result obtained: B, B, B, B, B, B
         Console.WriteLine("---------");
 
         // Add more Test Cases As Needed Below
