@@ -111,6 +111,17 @@ public static class SetsAndMapsTester {
         // To display the pair correctly use something like:
         // Console.WriteLine($"{word} & {pair}");
         // Each pair of words should displayed on its own line.
+        var mySet = new HashSet<string>();
+        foreach (var word in words){
+            var reverseWord = new string(word.Reverse().ToArray());
+
+            if (mySet.Contains(reverseWord)) {
+                Console.WriteLine($"{word} & {reverseWord}");
+            }else {
+                mySet.Add(word);
+            }
+    
+        }
     }
 
     /// <summary>
@@ -132,6 +143,11 @@ public static class SetsAndMapsTester {
         foreach (var line in File.ReadLines(filename)) {
             var fields = line.Split(",");
             // Todo Problem 2 - ADD YOUR CODE HERE
+            var degree = fields[3];
+            if (degrees.ContainsKey(degree))
+                degrees[degree] += 1; 
+            else
+                degrees[degree] = 1;
         }
 
         return degrees;
@@ -158,6 +174,8 @@ public static class SetsAndMapsTester {
     /// #############
     private static bool IsAnagram(string word1, string word2) {
         // Todo Problem 3 - ADD YOUR CODE HERE
+
+        
         return false;
     }
 
@@ -228,12 +246,15 @@ public static class SetsAndMapsTester {
         using var reader = new StreamReader(jsonStream);
         var json = reader.ReadToEnd();
         var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-
         var featureCollection = JsonSerializer.Deserialize<FeatureCollection>(json, options);
-
         // TODO:
         // 1. Add code in FeatureCollection.cs to describe the JSON using classes and properties 
         // on those classes so that the call to Deserialize above works properly.
         // 2. Add code below to print out each place a earthquake has happened today and its magitude.
+        foreach (var data in featureCollection.Features){
+            string place = data.Properties.Place;
+            double mag = data.Properties.Mag;
+            Console.WriteLine($"{place} - Mag {mag}");
+        }
     }
 }
