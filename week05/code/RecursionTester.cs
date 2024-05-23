@@ -277,10 +277,12 @@ public static class RecursionTester {
             return;
         }
 
+        // Get the index of the pattern
         var idx = pattern.IndexOf("*");
 
-        var prefix = pattern[..idx];
-        var sufix = pattern[(idx + 1)..];
+        // Segment the string and replace the '*' with '0' and '1'.
+        var prefix = pattern[..idx]; // before
+        var sufix = pattern[(idx + 1)..]; // after
 
         WildcardBinary(prefix + "0" + sufix);
         WildcardBinary(prefix + "1" + sufix);
