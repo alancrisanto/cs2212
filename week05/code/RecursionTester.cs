@@ -147,7 +147,11 @@ public static class RecursionTester {
     /// </summary>
     public static int SumSquaresRecursive(int n) {
         // TODO Start Problem 1
-        return 0;
+        if (n <= 0)
+            return 0;
+        else {
+            return n * n + SumSquaresRecursive(n - 1);
+        }
     }
 
     /// <summary>
@@ -171,6 +175,16 @@ public static class RecursionTester {
     /// </summary>
     public static void PermutationsChoose(string letters, int size, string word = "") {
         // TODO Start Problem 2
+        if (word.Length == size){
+            Console.WriteLine(word);
+            return;
+        }
+
+        for (int i = 0; i < letters.Length; i++) {
+            var newWord = word + letters[i];
+            var remainLetters = letters.Remove(i, 1);
+            PermutationsChoose(remainLetters, size, newWord);
+        }
     }
 
     /// <summary>
@@ -220,6 +234,9 @@ public static class RecursionTester {
     /// </summary>
     public static decimal CountWaysToClimb(int s, Dictionary<int, decimal>? remember = null) {
         // Base Cases
+        if (remember == null)
+            remember = new Dictionary<int, decimal>();
+
         if (s == 0)
             return 0;
         if (s == 1)
@@ -229,8 +246,14 @@ public static class RecursionTester {
         if (s == 3)
             return 4;
 
+        // Check if we have solved this one before
+        if (remember.ContainsKey(s))
+            return remember[s];
+
         // Solve using recursion
         decimal ways = CountWaysToClimb(s - 1) + CountWaysToClimb(s - 2) + CountWaysToClimb(s - 3);
+        // return ways;
+        remember[s] = ways;
         return ways;
     }
 
@@ -249,6 +272,19 @@ public static class RecursionTester {
     /// </summary>
     public static void WildcardBinary(string pattern) {
         // TODO Start Problem 4
+        if (!pattern.Contains("*")){
+            Console.WriteLine(pattern);
+            return;
+        }
+
+        var idx = pattern.IndexOf("*");
+
+        var prefix = pattern[..idx];
+        var sufix = pattern[(idx + 1)..];
+
+        WildcardBinary(prefix + "0" + sufix);
+        WildcardBinary(prefix + "1" + sufix);
+        
     }
 
     /// <summary>
